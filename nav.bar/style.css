@@ -1,7 +1,9 @@
 :root{
     --text-color: #f0f4f5;
-    --accent-color: #f0f4f5;
+    --accent-color: #e0a166;
     --background-color: #263343;
+    --hbackground-color: rgb(54, 103, 131);
+    --hover-color: yellow;
 }
 
 body{
@@ -13,6 +15,11 @@ a{
     text-decoration: none;
     color: var(--text-color);
 }
+
+p{
+    margin: 10px;
+}
+
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -22,7 +29,7 @@ a{
 }
 
 .navbar__logo{
-    font-size:26px;
+    font-size:29px;
     color: var(--text-color);
     padding-left: 10px;
 }
@@ -35,16 +42,19 @@ a{
 .navbar__menu{
     display:flex;
     list-style: none;
-    font-size: 18px;
+    font-size: 21px;
     padding-left: 0;
+
 }
 
 .navbar__menu li{
     padding: 8px 50px;
+
 }
 
 .navbar__menu li:hover{
-    background-color: var(--background-color);
+    color: var(--hover-color);
+    background-color: var(--hbackground-color);
     border-radius: 4px;
 }
 

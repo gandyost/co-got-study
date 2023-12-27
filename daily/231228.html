@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../nav.bar/style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@500&display=swap" rel="stylesheet">
+        <title>CSS 학습 정리</title>
+        <script src="https://kit.fontawesome.com/4c4c12112f.js" crossorigin="anonymous"></script>
+        <script src="../nav.bar/main.js" defer></script>
+        <style>
+            #grid{
+                border:5px solid pink;
+                display:grid;
+                grid-template-rows: 1fr 1fr;
+                grid-template-columns: 150px 1fr;
+            }
+            div{
+                border:5px solid gray;
+            }
+        </style>
+    </head>
+    <body>
+        <nav class="navbar">
+            <div class="navbar__logo">
+                <i class="fa-solid fa-hippo"></i>
+                <a href="../index.html">CoGodStudy</a>
+            </div>
+            <ul class="navbar__menu">
+                <li><a href="../html.html">HTML</a></li>
+                <li><a href="../css.html">CSS</a></li>
+                <li><a href="../java.html">JavaScrpt</a></li>
+            </ul>
+            <ul class="navbar__icons">
+                <li><a href="https://blog.naver.com/intp_library"><i class="fa-brands fa-blogger"></i></a></li>
+                <li><a href="https://www.youtube.com/@donniwhatna"><i class="fa-brands fa-youtube"></i></a></li>
+            </ul>
+
+            <a href="#" class="navbar__togglebtn"><i class="fa-solid fa-bars"></i></a>
+        </nav>
+        
+        <br>
+        <h3>예제로 살펴보기 - div 태그</h3>
+        <div id="grid">
+            <div>div 태그</div>
+            <div>아무 의미 없이 오직 디자인만을 위해 존자하는 태그. div 태그는 block 레벨(화면 전체를 사용)이다.</div>
+            <div>span 태그</div>
+            <div>역시 아무 의미 없이 디자인만을 위해 존재하는 태그. span 태그는 inline 엘리먼트(요소 크기 만큼만 화면 사용)라는 차이가 있다.</div>
+        </div>
+        <br>
+        <p>위 박스 크기를 통해 div 태그의 부피감을 확인해볼 수 있다.</p>
+        <p>grid를 통해 나뉘어진 구역을 확인해보도록 한다.</p>
+        <p>grid에서 columns는 열(세로줄), rows는 행(가로줄)을 의미한다.</p>
+
+    </body>
+</html>

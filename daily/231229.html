@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../nav.bar/style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@500&display=swap" rel="stylesheet">
+        <title>CSS 학습 정리</title>
+        <script src="https://kit.fontawesome.com/4c4c12112f.js" crossorigin="anonymous"></script>
+        <script src="../nav.bar/main.js" defer></script>
+        <style>
+            .max, .min{
+                border: 8px green solid;
+            }
+            
+            .tq_son{
+                border: 5px pink solid;
+            }
+
+            @media(max-width:768px) {
+                .max{
+                    display: none;
+                }
+                #tq_parent{
+                display: block;
+                }
+            }
+            @media(min-width:768px) {
+                .min{
+                    display: none;
+                }
+                #tq_parent{
+                display: grid;
+                grid-template-rows: 1fr 1fr;
+                grid-template-columns: 150px 1fr;
+            }
+            }
+        </style>
+    </head>
+    <body>
+        <nav class="navbar">
+            <div class="navbar__logo">
+                <i class="fa-solid fa-hippo"></i>
+                <a href="../index.html">CoGodStudy</a>
+            </div>
+            <ul class="navbar__menu">
+                <li><a href="../html.html">HTML</a></li>
+                <li><a href="../css.html">CSS</a></li>
+                <li><a href="../java.html">JavaScrpt</a></li>
+            </ul>
+            <ul class="navbar__icons">
+                <li><a href="https://blog.naver.com/intp_library"><i class="fa-brands fa-blogger"></i></a></li>
+                <li><a href="https://www.youtube.com/@donniwhatna"><i class="fa-brands fa-youtube"></i></a></li>
+            </ul>
+
+            <a href="#" class="navbar__togglebtn"><i class="fa-solid fa-bars"></i></a>
+        </nav>
+        
+        <h3>반응형 디자인(responsive web) 살펴보기</h3>
+        <div>
+            <p class="max">반응형 디자인이란 화면의 크기에 따라 웹페이지의 요소들이 최적화되어 변하는 디자인을 뜻한다. 지금 이 글은 div 태그로 감싸져있고, 화면의 가로 사이즈가 768px보다 작으면 화면에서 아예 보이지 않도록 구성하였다. 아마도 모바일 환경에서는 이 글이 보이지 않게 될 것이다.</p>
+            <p class="min">
+                반면, 이 본문은 화면이 작을 때에만 보인다. 모바일 화면에서는 지금 이 글만 보이게 될 것이다. pc에서 인터넷 창을 작게 만들면 지금 이 본문이 화면에 나타나게 될 것이다.
+            </p>
+            <p>이러한 미디어쿼리를 실제 상황에서 어떻게 유용하게 사용할 수 있을 것인가?</p>
+            <p>지난 시간에 배운 그리드와 미디어쿼리를 함께 적용해보았다. 레시피는 틀릴 수 있으므로 넘어가주시길 바란다...</p>
+        </div>
+        
+        <div id="tq_parent">
+            <div class="tq_son">라면을 끓이는 순서 알아보기</div>
+            <div class="tq_son">
+                <ol>
+                    <li>냄비에 물을 500ml 채운다.</li>
+                    <li>물이 끓기 시작하면 라면과 분말스프, 야채스프를 넣는다.</li>
+                    <li>약 4분간 조리 후에 맛있게 먹는다.</li>
+                </ol>
+            </div>
+            <div class="tq_son">카레라이스를 만드는 순서 알아보기</div>
+            <div class="tq_son">
+                <ol>
+                    <li>기름을 두른 팬에 양파를 볶는다.</li>
+                    <li>양파가 투명해지면 감자, 당근 등 각종 야채를 넣고 볶는다.</li>
+                    <li>야채가 어느 정도 익으면 고기를 넣는다.</li>
+                    <li>고기가 반 정도 익었을 때 물을 붓는다.</li>
+                    <li>물이 끓기 시작할 즈음 카레를 넣고 야채가 완전히 익을 때까지 끓여준다.</li>
+                </ol>
+            </div>
+        </div>
+        
+    </body>
+</html>

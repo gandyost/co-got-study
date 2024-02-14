@@ -71,9 +71,12 @@
                         let input = document.querySelectorAll('.input');
                         if(input[i+1].value == ''){
                             input[i].value = "";
+                            write = write.slice(0, -1);
+                            alert(write);
                             i=6;
                         } else if(input[5].value != ''){
                             input[5].value = '';
+                            write = write.slice(0, -1);
                         }
                     }
                 

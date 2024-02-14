@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wordle</title>
+
+    <style>
+        body{
+            text-align: center;
+        }
+        input{
+            width: 50px;
+            height: 50px;
+            font-size: 30px;
+            text-align: center;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>David's Wordle</h1>
+    <h3>게임방법</h3>
+    <p>6글자 영어 단어 맞추기 게임, 키보드 영타 입력 후 엔터</p>
+    <P>초록색 = 위치까지 맞음 / 노란색 = 들어있지만 위치는 틀림</P>
+    <div id = 'gameboard'>
+        <div><input class="input" maxlength="1" disabled value=""><input class="input" maxlength="1" disabled value=""><input maxlength="1" disabled class="input" value=""><input class="input" maxlength="1" disabled value=""><input class="input" maxlength="1" disabled value=""><input class="input" maxlength="1" disabled value=""></div>
+    </div>
+
+
+    <script>
+        let write = "";
+        const answer = ['person', 'people', 'pepper', 'banana', 'coffee', 'cookie', 'handle', 'better', 'garage', 'dancer', 'korean', 'monday', 'cosmos', 'device', 'player'];
+        const todayAnswer = answer[Math.floor(Math.random()*answer.length)];
+
+        document.querySelector('body').addEventListener("keydown", function(event) {
+            // If the  user presses the "Enter" key on the keyboard
+                if (event.key === "Enter") {
+                    // Cancel the default action, if needed
+                    event.preventDefault();
+                    // Trigger the button element with a click
+                    let input = document.querySelectorAll('.input');
+                    
+
+                    for (let i=0; i<6; i++){
+                        
+                        if (input[i].value === todayAnswer[i]){
+                            input[i].style.background = 'green';
+                        } else if (todayAnswer.includes(input[i].value)){
+                            input[i].style.background = 'yellow';
+                        } else {
+                            input[i].style.background = 'lightgrey';
+                        }
+                        input[i].classList.remove('input');
+                    }   
+                    
+                    var template = '<div><input class="input" maxlength="1" disabled><input class="input" maxlength="1" disabled><input class="input" maxlength="1" disabled><input class="input" maxlength="1" disabled><input class="input" maxlength="1" disabled><input class="input" maxlength="1" disabled></div>';
+                    document.querySelector('#gameboard').insertAdjacentHTML('beforeend', template);
+                        
+
+                    if(write == todayAnswer){                            
+                            alert("정답을 맞추셨습니다!")
+                            location.reload(true);
+                        }
+                        
+                    
+                    write = '';
+                    
+                } else if (event.key === "Backspace") {
+                    for(let i=0; i<6; i++) {
+                        let input = document.querySelectorAll('.input');
+                        if(input[i+1].value == ''){
+                            input[i].value = "";
+                            i=6;
+                        } else if(input[5].value != ''){
+                            input[5].value = '';
+                        }
+                    }
+                
+                } else if(event.keyCode <= 90 && event.keyCode >= 65){
+                    for(let i=0; i<6; i++) {
+                        let input = document.querySelectorAll('.input');
+                        if(input[i].value == false){
+                            input[i].disabled = false;
+                            input[i].value = event.key;
+                            input[i].disabled = true;
+                            write = write + event.key;
+                            i = 6;
+                        }
+                    }
+                }
+                
+            }
+        );
+    </script>
+</body>
+</html>

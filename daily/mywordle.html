@@ -6,9 +6,14 @@
     <title>Wordle</title>
 
     <style>
-        body{
+        
+        html, body{
+            margin: 0;
+            padding: 0;
+            height: 600px;
             text-align: center;
         }
+
         input{
             width: 50px;
             height: 50px;
@@ -16,31 +21,147 @@
             text-align: center;
             margin: 5px;
         }
+        
+        #gamecontainer{
+            height: 100%;
+            position: relative;
+        }
+
+        #gameboard{
+            height: 400px;
+            padding-bottom: 30px;
+        }
+
+        /* footer{
+            width: 100%;
+            height: 100px;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+        } */
+
+        button{
+            width: 40px;
+            height: 40px;
+            font-size: 25px;
+            margin: 5px;
+        }
+
+        #key_enter{
+            width: 100px;
+        }
+
+        @media screen and (max-width: 750px){
+            input{
+                width: 30px;
+                height: 30px;
+                font-size: 20px;
+            }
+        }
     </style>
 </head>
 <body>
     <h1>David's Wordle</h1>
     <h3>게임방법</h3>
-    <p>6글자 영어 단어 맞추기 게임, 키보드 영타 입력 후 엔터</p>
+    <p>6글자 영어 단어 맞추기 게임, 키보드/키패드 이용하기</p>
     <P>초록색 = 위치까지 맞음 / 노란색 = 들어있지만 위치는 틀림</P>
-    <div id = 'gameboard'>
-        <div><input class="input" maxlength="1" disabled value=""><input class="input" maxlength="1" disabled value=""><input maxlength="1" disabled class="input" value=""><input class="input" maxlength="1" disabled value=""><input class="input" maxlength="1" disabled value=""><input class="input" maxlength="1" disabled value=""></div>
+    <div id="gamecontainer">
+        <div id = 'gameboard'>
+            <div><input class="input" maxlength="1" disabled value=""><input class="input" maxlength="1" disabled value=""><input maxlength="1" disabled class="input" value=""><input class="input" maxlength="1" disabled value=""><input class="input" maxlength="1" disabled value=""><input class="input" maxlength="1" disabled value=""></div>
+            
+        </div>
+        <footer>
+            <div><button onclick="click_button('q')">q</button><button onclick="click_button('w')">w</button><button onclick="click_button('e')">e</button><button onclick="click_button('r')">r</button><button onclick="click_button('t')">t</button><button onclick="click_button('y')">y</button><button onclick="click_button('u')">u</button><button onclick="click_button('i')">i</button><button onclick="click_button('o')">o</button><button onclick="click_button('p')">p</button></div>
+            <div><button onclick="click_button('a')">a</button><button onclick="click_button('s')">s</button><button onclick="click_button('d')">d</button><button onclick="click_button('f')">f</button><button onclick="click_button('g')">g</button><button onclick="click_button('h')">h</button><button onclick="click_button('j')">j</button><button onclick="click_button('k')">k</button><button onclick="click_button('l')">l</button><button onclick="click_backspace()">⇤</button></div>
+            <div><button onclick="click_button('z')">z</button><button onclick="click_button('x')">x</button><button onclick="click_button('c')">c</button><button onclick="click_button('v')">v</button><button onclick="click_button('b')">b</button><button onclick="click_button('n')">n</button><button onclick="click_button('m')">m</button><button id="key_enter" onclick="click_enter()">enter</button></div>
+        </footer>
     </div>
-
-
     <script>
         let write = "";
         const answer = ['person', 'people', 'pepper', 'banana', 'coffee', 'cookie', 'handle', 'better', 'garage', 'dancer', 'korean', 'monday', 'cosmos', 'device', 'player'];
         const todayAnswer = answer[Math.floor(Math.random()*answer.length)];
+        let count_answer = 0;
 
-        document.querySelector('body').addEventListener("keydown", function(event) {
-            // If the  user presses the "Enter" key on the keyboard
-                if (event.key === "Enter") {
+        function click_button(btn){
+            for(let i=0; i<6; i++) {
+                let input = document.querySelectorAll('.input');
+                if(input[i].value == false){
+                    // input[i].disabled = false;
+                    input[i].value = btn;
+                    // input[i].disabled = true;
+                    write = write + btn;
+                    i = 6;
+                }
+            }
+            
+        }
+
+        function click_enter(){
+            count_answer += 1;
+                    if (count_answer === 6){
+                        if (write != todayAnswer){
+                            alert("6번의 기회를 모두 사용하였습니다. 정답은 " + todayAnswer + " 입니다. 다시 도전해보세요!")
+                            location.reload(true);
+                        }
+                    }
                     // Cancel the default action, if needed
                     event.preventDefault();
                     // Trigger the button element with a click
                     let input = document.querySelectorAll('.input');
+
+                    for (let i=0; i<6; i++){
+                        
+                        if (input[i].value === todayAnswer[i]){
+                            input[i].style.background = 'green';
+                        } else if (todayAnswer.includes(input[i].value)){
+                            input[i].style.background = 'yellow';
+                        } else {
+                            input[i].style.background = 'lightgrey';
+                        }
+                        input[i].classList.remove('input');
+                    }   
                     
+                    var template = '<div><input class="input" maxlength="1" disabled><input class="input" maxlength="1" disabled><input class="input" maxlength="1" disabled><input class="input" maxlength="1" disabled><input class="input" maxlength="1" disabled><input class="input" maxlength="1" disabled></div>';
+                    document.querySelector('#gameboard').insertAdjacentHTML('beforeend', template);
+                        
+
+                    if(write == todayAnswer){                            
+                            alert("정답을 맞추셨습니다!")
+                            location.reload(true);
+                        }
+                        
+                    
+                    write = '';
+        }
+        
+        function click_backspace(){
+            for(let i=0; i<6; i++) {
+                let input = document.querySelectorAll('.input');
+                if(input[i+1].value == ''){
+                    input[i].value = "";
+                    write = write.slice(0, -1);
+                    i=6;
+                } else if(input[5].value != ''){
+                    input[5].value = '';
+                    write = write.slice(0, -1);
+                }
+            }
+        }
+
+        document.querySelector('body').addEventListener("keydown", function(event) {
+            // If the  user presses the "Enter" key on the keyboard
+                if (event.key === "Enter") {
+                    count_answer += 1;
+                    if (count_answer === 6){
+                        if (write != todayAnswer){
+                            alert("6번의 기회를 모두 사용하였습니다. 정답은 " + todayAnswer + " 입니다. 다시 도전해보세요!")
+                            location.reload(true);
+                        }
+                    }
+                    // Cancel the default action, if needed
+                    event.preventDefault();
+                    // Trigger the button element with a click
+                    let input = document.querySelectorAll('.input');
 
                     for (let i=0; i<6; i++){
                         
@@ -72,7 +193,6 @@
                         if(input[i+1].value == ''){
                             input[i].value = "";
                             write = write.slice(0, -1);
-                            
                             i=6;
                         } else if(input[5].value != ''){
                             input[5].value = '';
@@ -84,9 +204,9 @@
                     for(let i=0; i<6; i++) {
                         let input = document.querySelectorAll('.input');
                         if(input[i].value == false){
-                            input[i].disabled = false;
+                            // input[i].disabled = false;
                             input[i].value = event.key;
-                            input[i].disabled = true;
+                            // input[i].disabled = true;
                             write = write + event.key;
                             i = 6;
                         }

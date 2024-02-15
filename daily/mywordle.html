@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Wordle</title>
-
     <style>
         
         html, body{
@@ -93,14 +92,14 @@
             
         </div>
         <footer>
-            <div><button onclick="click_button('q')">q</button><button onclick="click_button('w')">w</button><button onclick="click_button('e')">e</button><button onclick="click_button('r')">r</button><button onclick="click_button('t')">t</button><button onclick="click_button('y')">y</button><button onclick="click_button('u')">u</button><button onclick="click_button('i')">i</button><button onclick="click_button('o')">o</button><button onclick="click_button('p')">p</button></div>
+            <div><button onclick="click_button('q')" value = 'q'>q</button><button onclick="click_button('w')">w</button><button onclick="click_button('e')">e</button><button onclick="click_button('r')">r</button><button onclick="click_button('t')">t</button><button onclick="click_button('y')">y</button><button onclick="click_button('u')">u</button><button onclick="click_button('i')">i</button><button onclick="click_button('o')">o</button><button onclick="click_button('p')">p</button></div>
             <div><button onclick="click_button('a')">a</button><button onclick="click_button('s')">s</button><button onclick="click_button('d')">d</button><button onclick="click_button('f')">f</button><button onclick="click_button('g')">g</button><button onclick="click_button('h')">h</button><button onclick="click_button('j')">j</button><button onclick="click_button('k')">k</button><button onclick="click_button('l')">l</button><button onclick="click_backspace()">⇤</button></div>
             <div><button onclick="click_button('z')">z</button><button onclick="click_button('x')">x</button><button onclick="click_button('c')">c</button><button onclick="click_button('v')">v</button><button onclick="click_button('b')">b</button><button onclick="click_button('n')">n</button><button onclick="click_button('m')">m</button><button id="key_enter" onclick="click_enter()">enter</button></div>
         </footer>
     </div>
     <script>
         let write = "";
-        const answer = ['person', 'people', 'pepper', 'banana', 'coffee', 'cookie', 'handle', 'better', 'garage', 'dancer', 'korean', 'monday', 'cosmos', 'device', 'player'];
+        const answer = ['person', 'orange', 'jungle', 'bubble', 'rabbit', 'wonder', 'people', 'pepper', 'banana', 'coffee', 'cookie', 'handle', 'better', 'garage', 'dancer', 'korean', 'monday', 'cosmos', 'device', 'player'];
         const todayAnswer = answer[Math.floor(Math.random()*answer.length)];
         let count_answer = 0;
 
@@ -120,40 +119,49 @@
 
         function click_enter(){
             count_answer += 1;
-                    if (count_answer === 6){
-                        if (write != todayAnswer){
-                            alert("6번의 기회를 모두 사용하였습니다. 정답은 " + todayAnswer + " 입니다. 다시 도전해보세요!")
-                            location.reload(true);
+
+            if (count_answer === 6){
+                if (write != todayAnswer){
+                    alert("6번의 기회를 모두 사용하였습니다. 정답은 " + todayAnswer + " 입니다. 다시 도전해보세요!")
+                    location.reload(true);
+                }
+            }
+            // Cancel the default action, if needed
+            event.preventDefault();
+            // Trigger the button element with a click
+            let input = document.querySelectorAll('.input');
+
+            for (let i=0; i<6; i++){
+                
+                if (input[i].value === todayAnswer[i]){
+                    input[i].style.background = 'green';
+                } else if (todayAnswer.includes(input[i].value)){
+                    input[i].style.background = 'yellow';
+                } else {
+                    input[i].style.background = 'lightgrey';
+                    
+                    let btnsAll = document.querySelectorAll('button')
+                    
+                    for(j=0; j<btnsAll.length; j++){
+                        if(input[i].value == btnsAll[j].innerText){
+                            btnsAll[j].style.backgroundColor = 'red';
                         }
                     }
-                    // Cancel the default action, if needed
-                    event.preventDefault();
-                    // Trigger the button element with a click
-                    let input = document.querySelectorAll('.input');
+                }
+                input[i].classList.remove('input');
+            }   
+            
+            var template = '<div><input class="input" maxlength="1" disabled><input class="input" maxlength="1" disabled><input class="input" maxlength="1" disabled><input class="input" maxlength="1" disabled><input class="input" maxlength="1" disabled><input class="input" maxlength="1" disabled></div>';
+            document.querySelector('#gameboard').insertAdjacentHTML('beforeend', template);
+                
 
-                    for (let i=0; i<6; i++){
-                        
-                        if (input[i].value === todayAnswer[i]){
-                            input[i].style.background = 'green';
-                        } else if (todayAnswer.includes(input[i].value)){
-                            input[i].style.background = 'yellow';
-                        } else {
-                            input[i].style.background = 'lightgrey';
-                        }
-                        input[i].classList.remove('input');
-                    }   
-                    
-                    var template = '<div><input class="input" maxlength="1" disabled><input class="input" maxlength="1" disabled><input class="input" maxlength="1" disabled><input class="input" maxlength="1" disabled><input class="input" maxlength="1" disabled><input class="input" maxlength="1" disabled></div>';
-                    document.querySelector('#gameboard').insertAdjacentHTML('beforeend', template);
-                        
-
-                    if(write == todayAnswer){                            
-                            alert("정답을 맞추셨습니다!")
-                            location.reload(true);
-                        }
-                        
-                    
-                    write = '';
+            if(write == todayAnswer){                            
+                    alert("정답을 맞추셨습니다!")
+                    location.reload(true);
+                }
+                
+            
+            write = '';
         }
         
         function click_backspace(){
@@ -193,6 +201,15 @@
                             input[i].style.background = 'yellow';
                         } else {
                             input[i].style.background = 'lightgrey';
+
+                            let btnsAll = document.querySelectorAll('button')
+                    
+                            for(j=0; j<btnsAll.length; j++){
+                                if(input[i].value == btnsAll[j].innerText){
+                                    btnsAll[j].style.backgroundColor = 'red';
+                                    
+                                }
+                            }
                         }
                         input[i].classList.remove('input');
                     }   

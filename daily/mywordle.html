@@ -53,6 +53,10 @@
         }
 
         @media screen and (max-width: 750px){
+            p{
+                margin: 10px;
+            }
+
             input{
                 width: 30px;
                 height: 30px;
@@ -99,7 +103,7 @@
     </div>
     <script>
         let write = "";
-        const answer = ['bottle', 'sunday', 'spring', 'summer', 'winter', 'donkey', 'monkey', 'london', 'france', 'canada', 'killer', 'candle', 'length', 'salmon', 'person', 'orange', 'jungle', 'bubble', 'rabbit', 'wonder', 'people', 'pepper', 'banana', 'coffee', 'cookie', 'handle', 'better', 'garage', 'dancer', 'korean', 'monday', 'cosmos', 'device', 'player'];
+        const answer = ['answer', 'friday', 'return', 'friend', 'height', 'border', 'screen', 'bottom', 'margin', 'script', 'lonely', 'nipple', 'cancel', 'action', 'button', 'sunset', 'beauty', 'mammal', 'purple', 'animal', 'yellow', 'pretty', 'flower', 'garden', 'bottle', 'sunday', 'spring', 'summer', 'winter', 'donkey', 'monkey', 'london', 'france', 'canada', 'killer', 'candle', 'length', 'salmon', 'person', 'orange', 'jungle', 'bubble', 'rabbit', 'wonder', 'people', 'pepper', 'banana', 'coffee', 'cookie', 'handle', 'better', 'garage', 'dancer', 'korean', 'monday', 'cosmos', 'device', 'player'];
         const todayAnswer = answer[Math.floor(Math.random()*answer.length)];
         let count_answer = 0;
 
@@ -118,22 +122,18 @@
         }
 
         function click_enter(){
-            count_answer += 1;
-
-            if (count_answer === 6){
-                if (write != todayAnswer){
-                    alert("6번의 기회를 모두 사용하였습니다. 정답은 " + todayAnswer + " 입니다. 다시 도전해보세요!")
-                    location.reload(true);
-                }
-            }
+            
             // Cancel the default action, if needed
             event.preventDefault();
             // Trigger the button element with a click
             let input = document.querySelectorAll('.input');
+            let inputSum = input[0].value+input[1].value+input[2].value+input[3].value+input[4].value+input[5].value
 
             for (let i=0; i<6; i++){
-                
-                if (input[i].value === todayAnswer[i]){
+                if (answer.includes(inputSum) == false){
+                    alert('Not in the word list');
+                    return false;
+                } else if (input[i].value === todayAnswer[i]){
                     input[i].style.background = 'green';
                 } else if (todayAnswer.includes(input[i].value)){
                     input[i].style.background = 'yellow';
@@ -150,7 +150,15 @@
                 }
                 input[i].classList.remove('input');
             }   
-            
+            count_answer += 1;
+
+            if (count_answer === 6){
+                if (write != todayAnswer){
+                    alert("6번의 기회를 모두 사용하였습니다. 정답은 " + todayAnswer + " 입니다. 다시 도전해보세요!")
+                    location.reload(true);
+                }
+            }
+
             var template = '<div><input class="input" maxlength="1" disabled><input class="input" maxlength="1" disabled><input class="input" maxlength="1" disabled><input class="input" maxlength="1" disabled><input class="input" maxlength="1" disabled><input class="input" maxlength="1" disabled></div>';
             document.querySelector('#gameboard').insertAdjacentHTML('beforeend', template);
                 
@@ -181,21 +189,18 @@
         document.querySelector('body').addEventListener("keydown", function(event) {
             // If the  user presses the "Enter" key on the keyboard
                 if (event.key === "Enter") {
-                    count_answer += 1;
-                    if (count_answer === 6){
-                        if (write != todayAnswer){
-                            alert("6번의 기회를 모두 사용하였습니다. 정답은 " + todayAnswer + " 입니다. 다시 도전해보세요!")
-                            location.reload(true);
-                        }
-                    }
+                    
                     // Cancel the default action, if needed
                     event.preventDefault();
                     // Trigger the button element with a click
                     let input = document.querySelectorAll('.input');
-
+                    let inputSum = input[0].value+input[1].value+input[2].value+input[3].value+input[4].value+input[5].value
+            
                     for (let i=0; i<6; i++){
-                        
-                        if (input[i].value === todayAnswer[i]){
+                        if (answer.includes(inputSum) == false){
+                            alert('Not in the word list');
+                            return false;
+                        } else if (input[i].value === todayAnswer[i]){
                             input[i].style.background = 'green';
                         } else if (todayAnswer.includes(input[i].value)){
                             input[i].style.background = 'yellow';
@@ -212,8 +217,16 @@
                             }
                         }
                         input[i].classList.remove('input');
-                    }   
+                    }
                     
+                    count_answer += 1;
+                    if (count_answer === 6){
+                        if (write != todayAnswer){
+                            alert("6번의 기회를 모두 사용하였습니다. 정답은 " + todayAnswer + " 입니다. 다시 도전해보세요!")
+                            location.reload(true);
+                        }
+                    }
+
                     var template = '<div><input class="input" maxlength="1" disabled><input class="input" maxlength="1" disabled><input class="input" maxlength="1" disabled><input class="input" maxlength="1" disabled><input class="input" maxlength="1" disabled><input class="input" maxlength="1" disabled></div>';
                     document.querySelector('#gameboard').insertAdjacentHTML('beforeend', template);
                         

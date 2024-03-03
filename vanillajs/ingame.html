@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>G.O.D. of Typing!</h1>
+    </header>
+    <article>
+        <div id="words"></div>
+        <form onsubmit="answerCheck(event)">
+            <input id="answerBox" name="answerBox" type="text" autofocus>
+        </form>
+        <div class="board">
+            <div class="boardTime">
+                남은시간 : <span id="timeLeft">4</span> 초
+            </div>
+            <div class="boardScore">
+                획득점수 : <span id="getScore">0</span> 점
+            </div>
+        </div>
+    </article>
+
+    <script src="script.js"></script>
+</body>
+</html>

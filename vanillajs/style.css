@@ -1,0 +1,79 @@
+*{margin: 0; padding: 0;}
+
+header, article{
+    text-align: center;
+    align-items: center;
+    align-content: center;
+}
+
+header{
+    background-color: rgb(148, 175, 216);
+    padding: 20px;
+    margin-bottom: 40px;
+}
+
+#words{
+    margin: 20px;
+    font-size: 35px;
+}
+
+.board{
+    display: flex;
+    text-align: center;
+    padding-left: 100px; padding-right: 100px;
+    margin: 15px;
+    justify-content: center;
+}
+
+.boardTime, .boardScore{
+    font-size: 20px;
+    margin: 0px 20px;
+}
+
+#answerBox{
+    font-size: 20px;
+    margin:30px;
+    padding: 5px;
+}
+
+.button{
+    width: 400px;
+    font-size: 25px;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 20px;
+    margin-top: 150px;
+    background-color: rgb(148, 175, 216);
+    cursor: pointer;
+}
+
+span{
+    font-size: 30px;
+}
+
+#EndBox{
+    text-align: center;
+    align-items: center;
+}
+
+#gameEnd{
+    align-self: center;
+    width: 400px;
+    font-size: 25px;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 20px;
+    margin-top: 150px;
+    background-color: rgb(148, 175, 216);
+    cursor: pointer;
+}
+
+p{
+    font-size: 30px;
+    margin: 20px;
+}
+
+.endings{
+    margin-top: 50px;
+    margin: 20px;
+}
